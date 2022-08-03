@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="../js/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <h2>人员列表</h2>
+      <input type="text" v-model="keyWord">
+      <button @click="sortType = 0">ori</button>
+      <button @click="sortType = 1">asc</button>
+      <button @click="sortType = 2">des</button>
+      <ul>
+        <li v-for="p in newfilper" :key="p.id">
+          {{p.name}}---{{p.age}}
+        </li>
+      </ul>
+
+    </div>
+    <script type="text/javascript">
+      const vm = new Vue({
+        el: '#root',
+        data:{
+          keyWord:'',
+          sortType:0, //0原顺序，1升序， 2降序
+          persons:[
+            {id:'001',name:'马冬梅',age:18},
+            {id:'002',name:'周冬雨',age:19},
+            {id:'003',name:'周杰伦',age:20},
+            {id:'004',name:'温兆伦',age:32}
+          ],
+          filPersons:[
+
+          ]
+
+        },
+        // watch:{
+        //   keyWord:{
+        //     immediate:true,
+        //     handler(val){
+        //     this.filPersons = this.persons.filter((p)=>{
+        //       return p.name.indexOf(val) !== -1})
+        //   }
+        //   } 
+        // },
+        computed:{
+          newfilper(){
+            const obj = this.persons.filter((p)=>{
+             return p.name.indexOf(this.keyWord) !== -1
+            })
+            if (this.sortType){
+              obj.sort((p1,p2)=>{
+                return this.sortType === 1 ? p1.age - p2.age : p2.age - p1.age
+              })
+            }
+            return obj
+          }
+        }       
+      })
+    </script>
+  </body>
+</html>

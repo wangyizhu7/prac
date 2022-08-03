@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <style>
+        [v-cloak]{
+            display:none
+        }
+    </style>
+  </head>
+  <body>
+    <div id="root">
+      <h2>当前N值是：<span v-text="n"></span></h2>
+      <h2>放大10倍后的n值是：<span v-big="n"></span></h2>
+      <button @click="n++">点我n+1</button>
+      <hr>
+      <input type="text" v-fbind:value="n">
+    </div>
+    <script type="text/javascript">
+      const vm = new Vue({
+        el:'#root',
+        data:{
+        n:1
+        },
+        directives:{
+          big(element,binding){
+            element.innerText = binding.value * 10
+            // console.log(element,binding)
+          },
+          fbind:{
+            //指令与元素成功绑定时（一上来）
+            bind(element,binding){
+              console.log('bind');
+              element.value = binding.value
+            },
+            //指令所在元素被插入页面时
+            inserted(element,binding){
+              console.log('inserted');
+              element.focus()
+            },
+            //指令所在模板被重新解析时
+            update(element,binding){
+              console.log('update');
+              element.value = binding.value
+            }
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

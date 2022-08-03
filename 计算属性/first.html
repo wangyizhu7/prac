@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="../js/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      firstname: <input type="text" v-model="firstName"><br>
+      lastname: <input type="text" v-model="lastName"><br>
+      fullName: <span>{{fullName()}}</span>
+    </div>
+    <script type="text/javascript">
+      const vm = new Vue({
+        el: '#root',
+        data:{
+          firstName: 'wang',
+          lastName: 'zz'
+        },
+        methods:{
+          fullName(){
+            return this.firstName + '-' + this.lastName
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

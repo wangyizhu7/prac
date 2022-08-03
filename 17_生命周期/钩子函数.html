@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <style></style>
+  </head>
+  <body>
+    <div id="root">
+      <h2>当前N值是：{{n}}</h2>
+      <button @click="add">点位n+1</button>
+      <button @click="destroy">销毁</button>
+    </div>
+    <script type="text/javascript">
+
+      const vm = new Vue({
+        el: "#root",
+        data:{
+          n:1
+        },
+        methods:{
+          add(){
+            this.n++
+          },
+          destroy(){
+            console.log('bye');
+            this.$destroy()
+          }
+        },
+        watch:{
+          n(){
+            console.log('n变了');
+          }
+        },
+        beforeCreate(){
+          console.log('beforeCreate');
+          // debugger;
+        },
+        created(){
+          console.log('created');
+        },
+        beforeMount(){
+          console.log('beforeMount');
+          // console.log(this);
+        },
+        mounted(){
+          console.log('mounted');
+          // console.log(this);
+          // debugger;
+          //important 发送ajax请求，启动定时器，绑定自定义事件，订阅消息等初始化操作
+        },
+        beforeUpdate(){
+          console.log('beforeUpdate');
+          // console.log(this.n);
+          // debugger;
+        },
+        updated(){
+          // console.log('updated');
+          // console.log(this.n);
+          // debugger
+        },
+        beforeDestroy(){
+          console.log('beforeDestroy');
+          //important 清除定时器/解绑自定义事件，取消订阅消息等收尾工作
+        },
+        destroyed(){
+          console.log('destroyed');
+        }
+      });
+      
+    </script>
+  </body>
+</html>

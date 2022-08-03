@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="../js/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <h2>current value:{{num}}</h2>
+      <button @click="addm">clickto+</button>
+      <div v-if="num === 1">an</div>
+      <div v-else-if="num===1">react</div>
+      <div v-else-if="num===3">vue</div>
+      <div v-else>hahahaahah</div>
+      <template v-if="num===2">
+        <h2>sdfa</h2>
+        <h2>sojdfa</h2>
+        <h2>sazzjfifj</h2>
+      </template>
+    </div>
+
+    <script type="text/javascript">
+      const vm = new Vue({
+        el: '#root',
+        data:{
+          num:0
+        },
+        methods:{
+          addm(){
+            this.num++;
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

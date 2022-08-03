@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+    <script type="text/javascript" src="../js/dayjs.min.js"></script>
+  </head>
+  <body>
+    <div id="root">
+        <h2>显示格式化后的时间</h2>
+        <h3>computed:现在是：{{fmtTime}}</h3>
+        <h3>method:{{getTime()}}</h3>
+        <!-- 过滤器实现 -->
+        <h3>现在是：{{time | timeFormatter('YYYY-MM-DD') | myslice}}</h3>
+    </div>
+    <script type="text/javascript">
+      const vm = new Vue({
+        el:'#root',
+        data:{
+            time:1657194353252
+        },
+        computed:{
+          fmtTime(){
+              return dayjs(this.time).format('YYYY年MM月DD日 HH:mm:ss')
+          }
+        },
+        methods:{
+          getTime(){
+            return dayjs(this.time).format('YYYY年MM月DD日 HH:mm:ss')
+          }
+        },
+        filters:{
+          timeFormatter(val,str='YYYY年MM月DD日 HH:mm:ss'){
+            return dayjs(val).format(str)
+          },
+          myslice(value){
+            return value.slice(0,4)
+          }
+        }
+      })
+    </script>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="../js/vue.js"></script>
+  </head>
+  <body>
+    <div id="root">
+      <h2>今天天气很{{info}}</h2>
+      <button @click="changeWeather">切换天气</button>
+      <div>a:{{numbers.a}}</div> <br>
+      <button @click="aaddOne">a++</button> <br>
+      <div>b:{{numbers.b}}</div><br>
+      <button @click="baddOne">b++</button>
+    </div>
+    <script type="text/javascript">
+      const vm = new Vue({
+        el:'#root',
+        data:{
+          isHot: true,
+          numbers:{
+            a: 1,
+            b: 2
+          }
+        },
+        computed:{
+          info(){
+            return this.isHot ? 'hot' : 'cool'
+          }
+        },
+        methods:{
+          changeWeather(){
+            this.isHot = !this.isHot
+          },
+          aaddOne(){
+            this.numbers.a++
+          },
+          baddOne(){
+            this.numbers.b++
+          }
+        },
+        watch:{
+          isHot:{
+            handler(newValue, oldValue){
+              console.log('isHot changed',newValue,oldValue);
+            }
+          },
+          numbers:{
+            deep:true,
+            handler(){
+              console.log('numbers changed');
+            }
+          }
+        }
+      })
+    </script>
+  </body>
+</html>
